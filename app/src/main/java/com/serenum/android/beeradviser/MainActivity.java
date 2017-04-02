@@ -10,6 +10,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BeerExpert expert = new BeerExpert();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,14 +19,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getAdvice(View view) {
-        BeerExpert expert = new BeerExpert();
         TextView advice = (TextView) findViewById(R.id.advice_textview);
         Spinner beerColor = (Spinner) findViewById(R.id.beer_color);
         List<String> brands = expert.getBrands(String.valueOf(beerColor.getSelectedItem()));
         StringBuilder listOfBrands = new StringBuilder();
         for(String brand: brands){
-            listOfBrands.append(brand);
-            listOfBrands.append("\n");
+            listOfBrands.append(brand).append('\n');
         }
         advice.setText(listOfBrands);
 

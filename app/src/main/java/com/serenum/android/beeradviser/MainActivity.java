@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,11 +17,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getAdvice(View view) {
+        BeerExpert expert = new BeerExpert();
         TextView advice = (TextView) findViewById(R.id.advice_textview);
         Spinner beerColor = (Spinner) findViewById(R.id.beer_color);
-        if((String.valueOf(beerColor.getSelectedItem())).equals("Dark"))
-            advice.setText("Great choice, I love a dark beer!");
-            else
-            advice.setText("FUUU!!!");
+        List<String> brands = expert.getBrands(String.valueOf(beerColor.getSelectedItem()));
+        StringBuilder listOfBrands = new StringBuilder();
+        for(String brand: brands){
+            listOfBrands.append(brand);
+            listOfBrands.append("\n");
+        }
+        advice.setText(listOfBrands);
+
+//        String typeOfbeer = String.valueOf(beerColor.getSelectedItem());
+//        advice.setText(typeOfbeer);
+//        if((String.valueOf(beerColor.getSelectedItem())).equals("Dark"))
+//            advice.setText("Great choice, I love a dark beer!");
+//            else
+//            advice.setText("FUUU!!!");
     }
 }
